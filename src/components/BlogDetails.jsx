@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import useFetch from "./useFetch";
 
 function BlogDetails() {
@@ -12,7 +12,7 @@ function BlogDetails() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleDelete = () => {
     fetch("http://localhost:5000/blogs/" + blog.id, {
       method: "DELETE",
     }).then(() => {
@@ -21,20 +21,30 @@ function BlogDetails() {
   };
 
   return (
-    <div className="">
+    <div>
       {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {blog && (
         <article className="space-y-4">
           <h2 className="text-xl text-[#f1356d] font-bold">{blog.title}</h2>
-          <p>Written by {blog.author}</p>
+          <p className="text-xl text-[#f1356d] font-bold">
+            Written by {blog.author}
+          </p>
           <div className="text-justify">{blog.body}</div>
-          <button
-            onClick={handleClick}
-            className="bg-[#f1356d] text-white p-2 cursor-pointer"
-          >
-            delete
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={handleDelete}
+              className="bg-[#f1356d] text-white p-2 cursor-pointer"
+            >
+              delete
+            </button>
+            <Link
+              to={`/blogs/${blog.id}/edit`}
+              className="bg-[#f1356d] text-white p-2 cursor-pointer"
+            >
+              Edit
+            </Link>
+          </div>
         </article>
       )}
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function BlogList({ blogs }) {
@@ -20,8 +20,3 @@ function BlogList({ blogs }) {
 }
 
 export default BlogList;
-
-// implicitly recieving props blogs & title
-
-//   const blogs = props.blogs;   // explicitly recieving props blogs & title
-//   const title = props.title;
